@@ -1,9 +1,8 @@
 module state_machine (input A, clk, reset, input [4:0] state, output reg [4:0] next_state);
-  always @ (posedge clk) begin
-    if (reset) begin
-      next_state <= 5'b00000;
-    end 
-	 else begin
+  always @ (posedge clk or posedge reset) begin
+		if (reset) begin
+			next_state <= 5'b00000;
+			end else begin
 		if (!A) begin
 			case (state)
 			5'b00000: next_state <= 5'b00001;
@@ -46,6 +45,6 @@ module state_machine (input A, clk, reset, input [4:0] state, output reg [4:0] n
 			5'b10001: next_state <= 5'b10000;
 			endcase
 			end
+			end
     end
-  end
 endmodule
